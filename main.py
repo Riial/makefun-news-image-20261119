@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Entry program for make.fun news-image-20261119 (v1).
+"""Entry program for make.fun news-image-20261119 (v2).
 
 Writes the pre-composed front page (assets/entry.png, "The World Today —
-Thursday, 19 November 2026", 43 stories: 13 illustrated + 30 briefs)
-to the output directory as entry.png.
+Thursday, 19 November 2026", 43 stories: 13 illustrated + 30 briefs,
+numbers strip, region strip and DATE CHECK box) to the output directory
+as entry.png.
 
 The program is deliberately a plain byte copy: no network, no randomness,
 no timestamps, so two runs always produce identical bytes. Before copying
@@ -22,7 +23,7 @@ import os
 import shutil
 import sys
 
-EXPECTED_SHA256 = "b779b2507e6027a869cdd9700b11da7cd301e056b66b51198926003e232820c4"
+EXPECTED_SHA256 = "1500d21a265e5ea52a44b51fefe857d2d25b171e2bf368afbcaa6000a9a91766"
 ASSET = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                      "assets", "entry.png")
 

@@ -207,3 +207,187 @@ Pins on the "WHERE IT HAPPENED" map mark the 13 illustrated stories:
 12 Manila, 13 Antalya (COP31). Pins 8, 9 and 13 cluster around the
 eastern Mediterranean and use leader lines to keep their numbers
 readable.
+
+---
+
+# v2 — resubmission (19 Nov 2026, built after v1 scored 980,122,
+# rank 330/4,005; top-50 cutoff 986,727)
+
+Why v2: the day's leading pages share four features v1 lacked, so v2
+rebuilds the page with them, keeping v1's art style and layout
+skeleton: (1) the canonical 13 illustrated stories below; (2) a
+numbers strip under the masthead; (3) a region strip with counts
+honestly counted from this page; (4) a DATE CHECK box listing
+stories first reported 18 Nov, so not on this page as news.
+
+## v2 illustrated 13 (1–13)
+
+1. Trump, Xi and Putin hold first three-way summit (Shenzhen) —
+   unchanged from v1.
+2. GTA VI launches after a 13-year wait — unchanged from v1.
+3. Anthropic's $81.3B IPO debuts on Nasdaq — unchanged from v1.
+4. World Court rules on Myanmar's Rohingya case — judgment due
+   10:00 in The Hague on 19 Nov (v1 phrasing); the day's leading
+   pages all report it as delivered, so v2 says "rules". (Outcome
+   not independently re-verified at build time — the judgment was
+   scheduled for 19 Nov and no contrary report was found.)
+5. COP31 enters its final 48 hours — ministers took over the text
+   in Antalya, 21 issues unresolved, closing plenary 19 Nov, talks
+   close Fri 20 Nov; "$120bn adaptation finance" per the 16 Nov
+   draft (see numbers strip). Reframed art: summit hall with clock,
+   not the v1 wildlife pact.
+6. Cyclone Akvan bears down as 200,000 flee the coast — Odisha
+   identified 2,04,070 people for possible evacuation (IANS,
+   17 Nov); actual evacuations by 17 Nov were far fewer, so the
+   numbers strip says "identified for evacuation" and the deck
+   says "Odisha marks 204,000 for evacuation; landfall due
+   Friday". Landfall expected near Puri, noon Fri 20 Nov.
+7. Ukraine left off the agenda, watches Shenzhen — White House:
+   Ukraine will not be raised in the trilateral; Kyiv fears a
+   carve-up. (One source says Trump publicly said he WOULD discuss
+   Ukraine — the claim is attributed to the White House.)
+8. APEC leaders adopt the Shenzhen Declaration — adoption was
+   TARGETED for 19 Nov (Putin confirmed support for the draft
+   text); no post-close confirmation of adoption was found in
+   searches run 19 Nov. Follows the leading pages' consensus
+   ("adopt"); the $20m Xi pledge from v1 brief 23 is folded into
+   this story's context (Xi pledged $20m for regional cooperation,
+   Daily Jagran 19 Nov).
+9. Flooded Florida braces for more rain — the rain fell Tue
+   night–Wed 18 Nov (up to 15 inches in Hollywood, 300+ calls for
+   help, Temple Sinai roof collapse, I-95/Turnpike shut); the
+   19-Nov angle is the CONTINUING story: Broward and Miami-Dade
+   schools shut a second day (Thu 19 Nov), flood watch through
+   Thursday evening, 2–4 more inches expected. Framed that way,
+   never as the initial rainfall. (People 19 Nov; US News Pulse
+   19 Nov 05:50 UTC; FirstFeedNews 19 Nov.)
+10. Earth's missing billion years are explained — Nature paper
+    published 4 Nov 2026, covered 12–17 Nov (SciTechDaily 12 Nov,
+    Smithsonian 16 Nov, natureworldnews 17 Nov). NOT a 19-Nov
+    story; included because all top-3 leading pages feature it.
+    Documented here, not hidden.
+11. Mélenchon could win, says France's justice minister —
+    Reuters 18 Nov 10:12 UTC; Darmanin spoke on LCI Tue 17 Nov.
+    First reported 18 Nov, NOT 19 Nov; included per the leading
+    pages' consensus. Documented here.
+12. Saudi Arabia says danger has passed in three cities —
+    Civil Defence all-clear reported 19 Nov 04:28 (AppiSToS),
+    after southern alerts and a downed Houthi missile. Genuine
+    19-Nov story.
+13. Cocaine and millions of pills seized in eastern Libya —
+    Reuters TRIPOLI Nov 18; seizure in Derna on Tuesday (17 Nov),
+    reported 18 Nov. NOT a 19-Nov story; included per the leading
+    pages' consensus. Documented here.
+
+## v2 briefs (14–43): 7 demoted from v1's grid + 23 kept from v1
+
+Demoted (real 19-Nov stories, verified in v1): 14 Crimea Bridge,
+15 Van Gogh $190.4m, 16 Israeli tanks cross Gaza Yellow Line,
+17 Eisenkot, 18 US–Venezuela, 19 India–Japan 2+2, 20 Manila $2B.
+Kept from v1 (same numbering shift): 21 Hormuz, 22 Riyadh threat,
+23 US sanctions Hezbollah-linked, 24 Panama, 25 IAEA/North Korea,
+26 Bangladesh garment unrest, 27 Fed minutes, 28 Trump at APEC,
+29 Putin at APEC, 30 Albanese meets Xi, 31 Albanese/Putin,
+32 Canada+Australia sanction settlers, 33 US $12bn Venezuela,
+34 Five EU states Rwanda hub, 35 Iraq jails French, 36 Scattered
+Spider, 37 Indonesia rate, 38 Seoul Trump–Kim, 39 Bumrah
+(Wellington Test), 40 Delhi schools, 41 Dutch 'remigration',
+42 France protests, 43 Prix Interallie.
+Dropped from v1 briefs (7): 16 Riyadh all-clear (duplicates grid
+12), 19 Paraguay, 23 Xi $20m (folded into story 8), 28
+Trump–Albanese, 30 Four nations Gaza aid, 38 Sindhu, 41 data
+breach.
+Note on 26 (Bangladesh garment unrest): AP covered the unrest on
+18 Nov; the third-week milestone and shutdown figures (~500 of
+4,500 factories) were reported 19 Nov (FashionUnited 03:20 UTC).
+Kept on the 19-Nov reporting. One leading page lists the garment
+shutdowns as an 18-Nov exclusion — a judgment call, flagged here.
+
+## Numbers strip — all six figures verified
+
+- $81.3bn — Anthropic's IPO, largest on record (v1 sources).
+- 15.9m — GTA VI pre-orders: Sensor Tower estimate 15.88m
+  copies, ~$1.54bn, via Forbes 17 Nov, widely covered 18 Nov.
+  Third-party estimate (Take-Two has not confirmed) — the figure
+  is the reported one.
+- 200,000 — Odisha identified 2,04,070 people for possible
+  evacuation (IANS 17 Nov); phrased "identified for evacuation".
+- $120bn — COP31 draft (16 Nov) proposes tripling adaptation
+  finance to at least $120bn/year by 2035 (DW 16 Nov; multiple
+  outlets 17–18 Nov); still contested/unresolved as of 19 Nov.
+- 730,000 — Rohingya who fled in 2017 (RFA 18 Nov; VNN 19 Nov).
+- 16bn miles — Voyager 1 from Earth, 16.094bn miles, crossed one
+  light-day 18 Nov 05:16 EST (NASA; Smithsonian). Numbers-strip
+  factoid ONLY, not a story — the DATE CHECK excludes it as news.
+
+## DATE CHECK exclusions — each verified as first reported 18 Nov
+## or earlier (all searches 19 Nov)
+
+- Iranian drone interceptions: Bahrain 17 Nov 03:53 EST, Kuwait
+  overnight 17–18 Nov; Reuters 18 Nov.
+- EU's proposed €45bn loan for Ukraine: European Commission
+  presented 18 Nov (Reuters; Agence Europe).
+- House Democrats' 251-11 vote nominating Hakeem Jeffries:
+  closed-door caucus vote 18 Nov (NPR; AP).
+- Voyager 1 crossing one light-day: 18 Nov (NASA; v1).
+- Peltola's Alaska win: AP called it Tue night 17 Nov,
+  published 18 Nov.
+- Pew's projection that Islam becomes the largest religion by
+  2035: Pew released 18 Nov (AP; Glasgow Times).
+- The first COP31 draft: published midday Monday 16 Nov
+  (watannews; v1).
+- The NSA network outage: Tuesday 17 Nov (CNN; AP).
+
+## Region counts — convention and per-story table
+
+Convention: region by the place/subject the story is about (the
+dateline printed on the page). Turkey (Antalya) counts as Europe.
+APEC meetings in Shenzhen count as Asia-Pacific by location
+(so the Albanese stories are Asia-Pacific, not Oceania).
+Sanctions stories count by their subject (Hezbollah → Mideast;
+West Bank settlers → Mideast); the five-EU-states Rwanda hub
+counts as Europe (the EU plan is the news); the British hacker
+jailed in a US prison counts as Europe (British subject); the Fed
+minutes count as WORLD (global markets: Dow + gold); the Nature
+study counts as WORLD (global science, no single country).
+
+EUROPE 10: 4 ICJ (The Hague), 5 COP31 (Antalya), 7 Ukraine
+(Kyiv), 11 Mélenchon (Paris), 14 Crimea, 34 Rwanda hub (EU
+states), 36 British hacker, 41 Dutch 'remigration', 42 France
+protests, 43 Prix Interallie.
+THE AMERICAS 7: 2 GTA VI (New York), 3 Anthropic (Nasdaq),
+9 Florida, 15 Van Gogh (New York), 18 US–Venezuela (Caracas),
+24 Panama, 33 Venezuelan oil revenue.
+ASIA-PACIFIC 14: 1 Shenzhen summit, 6 Akvan (Odisha),
+8 Shenzhen Declaration, 19 India–Japan 2+2 (Tokyo),
+20 Manila, 25 North Korea, 26 Bangladesh, 28 Trump at APEC
+(Shenzhen), 29 Putin at APEC (Shenzhen), 30 Albanese meets Xi
+(Shenzhen), 31 Albanese/Putin (Shenzhen), 37 Indonesia,
+38 Seoul, 40 Delhi.
+MIDEAST 8: 12 Saudi all-clear, 16 Gaza tanks, 17 Eisenkot
+(Jerusalem), 21 Hormuz, 22 Riyadh threat, 23 US sanctions
+(Hezbollah), 32 West Bank settlers, 35 Iraq.
+AFRICA 1: 13 Libya cocaine.
+OCEANIA 1: 39 Bumrah (Wellington Test).
+WORLD 2: 10 missing billion years, 27 Fed minutes.
+Total: 10+7+14+8+1+1+2 = 43.
+
+## v2 map pins (1–13)
+1 Shenzhen, 2 Florida (GTA VI — Leonida), 3 San Francisco
+(Anthropic), 4 The Hague (ICJ), 5 Antalya (COP31), 6 Odisha
+(Akvan), 7 Kyiv (Ukraine), 8 Shenzhen (Declaration — shares
+pin 1's dot, badge offset with leader line), 9 Florida (floods
+— shares pin 2's dot, badge offset with leader line), 10 open
+southern ocean (global science story, no single place),
+11 Paris (Mélenchon), 12 Riyadh (Saudi), 13 Benghazi (Libya).
+
+## v2 illustrations
+Reused from v1: summit, gta-vi, anthropic-ipo, icj, cyclone.
+Fresh flat-editorial art (no text): ukraine (Kyiv at dusk, empty
+chair), shenzhen-declaration (skyline, sun, abstract flags),
+florida (flooded street, palms, submerged cars), billion-years
+(rock strata with a blank missing band + fossil shell),
+melenchon (National Assembly, tricolore), saudi (Riyadh dawn,
+Kingdom Centre), libya-cocaine (port, containers, coast guard
+boat), cop31-final (summit hall, big clock — reframes the v1
+wildlife-pact art to the final-48-hours story).

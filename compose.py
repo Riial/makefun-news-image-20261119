@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
-"""Compose the 19 November 2026 world-news front page (1024x1024) — v1.
+"""Compose the 19 November 2026 world-news front page (1024x1024) — v2.
 
 Dense newspaper front page in the v1 visual language (navy/cream, serif
 masthead): 43 stories reported on Thursday 19 November 2026.
   - Top row: 3 big illustrated stories (Shenzhen summit, GTA VI, Anthropic IPO).
-  - Grid: 10 more illustrated stories (4-13), each with a source credit.
+  - Numbers strip under the masthead: 6 big figures from this page.
+  - Region strip under the masthead: per-region story counts, honestly
+    counted from this page's 43 stories (see NEWS.md for the convention).
+  - Grid: 10 more illustrated stories (4-13), the canonical set the
+    day's leading pages carry, each with a source credit.
   - Bottom: "WHERE IT HAPPENED" world map with numbered pins (1-13) plus
     "ALSO ON THURSDAY 19 NOVEMBER": 30 numbered briefs (14-43).
+  - DATE CHECK box above the footer: stories first reported 18 Nov,
+    so not on this page as news.
   - Footer: date-check note + full source list.
 All typography is drawn with PIL so every word stays sharp and legible.
 Illustration panels are original art generated for this entry (assets/raw/).
@@ -93,8 +99,56 @@ def main():
     d.text((W - 16, 40), "43 STORIES \u00b7 6 CONTINENTS \u00b7 ONE DAY",
            font=font(SANS_B, 15), fill=GOLD, anchor="ra")
 
+    # ---------- Region strip: honestly counted from this page ----------
+    regions = [
+        ("EUROPE", 10, (43, 108, 176)),
+        ("THE AMERICAS", 7, (47, 133, 90)),
+        ("ASIA-PACIFIC", 14, (197, 48, 48)),
+        ("MIDEAST", 8, (183, 121, 31)),
+        ("AFRICA", 1, (214, 158, 46)),
+        ("OCEANIA", 1, (107, 70, 193)),
+        ("WORLD", 2, (74, 85, 104)),
+    ]
+    strip_x0, strip_w, strip_y, strip_h = 8, 1008, 88, 20
+    widths = [212, 149, 297, 170, 64, 64, 52]
+    rf = font(SANS_B, 9)
+    x = strip_x0
+    for (label, n, color), w in zip(regions, widths):
+        d.rectangle([x, strip_y, x + w, strip_y + strip_h], fill=color)
+        d.text((x + w / 2, strip_y + 4), f"{label} {n}", font=rf, fill=WHITE,
+               anchor="ma")
+        x += w
+
+    # ---------- Numbers strip: six big figures from this page ----------
+    numbers = [
+        ("$81.3bn", "raised by Anthropic \u2014 the largest IPO on record"),
+        ("15.9m", "GTA VI pre-orders banked before release day"),
+        ("200,000", "identified for evacuation ahead of Cyclone Akvan"),
+        ("$120bn", "a year of adaptation finance unresolved at COP31"),
+        ("730,000", "Rohingya who fled in 2017 \u2014 the ICJ case"),
+        ("16bn miles", "Voyager 1 from Earth \u2014 one light-day out"),
+    ]
+    num_y, num_h = 110, 46
+    col_w = strip_w // len(numbers)
+    nf = font(SANS_B, 19)
+    cf = font(SANS, 10)
+    for i, (fig, cap) in enumerate(numbers):
+        cx = strip_x0 + i * col_w
+        d.text((cx + col_w / 2, num_y + 1), fig, font=nf, fill=RED, anchor="ma")
+        lines = wrap(d, cap, cf, col_w - 12)
+        yy = num_y + 23
+        for ln in lines[:2]:
+            d.text((cx + col_w / 2, yy), ln, font=cf, fill=(52, 52, 50),
+                   anchor="ma")
+            yy += 11
+        if i:
+            d.line([(cx, num_y + 4), (cx, num_y + num_h - 4)], fill=BORDER,
+                   width=1)
+    d.line([(strip_x0, num_y + num_h), (strip_x0 + strip_w, num_y + num_h)],
+           fill=GOLD, width=2)
+
     # ---------- Top row: 3 big illustrated stories ----------
-    top_y, top_h, top_img = 96, 200, 92
+    top_y, top_h, top_img = 162, 188, 88
     top_w = 330
     top_x = [8, 347, 686]
     top = [
@@ -115,7 +169,7 @@ def main():
         pic = cover(raw(name), top_w - 4, top_img, cy=cy)
         img.paste(pic, (x0 + 2, top_y + 2))
         credit(d, x0 + 2, top_y + 2 + top_img, top_w - 4, src)
-        ty = top_y + top_img + 10
+        ty = top_y + top_img + 8
         d.text((x0 + 14, ty), kicker, font=font(SANS_B, 13), fill=RED)
         hf = font(SANS_B, 18)
         lines = wrap(d, head, hf, top_w - 28)
@@ -131,29 +185,29 @@ def main():
 
     # ---------- Grid: 10 illustrated stories (4-13) ----------
     grid = [
-        ("crimea-bridge", "BRIDGE HIT AGAIN", "Crimea link shut after a third strike this week.",
-         "BBC"),
-        ("icj", "WORLD COURT RULES TODAY", "Myanmar genocide verdict due in The Hague.",
-         "ICJ"),
-        ("vangogh", "VAN GOGH: A RECORD $190.4M", "Blossoming Chestnut Trees tops the artist's record.",
-         "BBC"),
-        ("cyclone", "CYCLONE AKVAN NEARS INDIA", "Storm set to cross between Machilipatnam and Puri.",
-         "AFP"),
-        ("gaza", "ISRAELI TANKS CROSS INTO GAZA", "Rare ground move beyond the ceasefire line.",
-         "BBC"),
-        ("eisenkot", "EISENKOT TO FORM GOVERNMENT", "Herzog picks ex-army chief over Netanyahu.",
-         "AP"),
-        ("venezuela", "U.S., VENEZUELA RESTORE TIES", "Military cooperation resumes, Hegseth says.",
-         "AP"),
-        ("tokyo-talks", "INDIA, JAPAN IN 2+2 TALKS", "Defence dialogue opens in Tokyo.",
-         "ANI"),
-        ("manila", "U.S. PURSUES $2B FOR MANILA", "Loan package for the Philippines in the works.",
-         "AP"),
-        ("cop31", "25 NATIONS BACK WILDLIFE PACT", "COP31 first: animals join the climate deal.",
-         "REUTERS"),
+        ("icj", "WORLD COURT RULES ON MYANMAR",
+         "Judgment read in The Hague on the 2017 Rohingya case.", "ICJ"),
+        ("cop31-final", "COP31 ENTERS ITS FINAL 48 HOURS",
+         "Ministers take over in Antalya; the $120bn fund still open.", "REUTERS"),
+        ("cyclone", "AKVAN BEARS DOWN AS 200,000 FLEE THE COAST",
+         "Odisha marks 204,000 for evacuation; landfall due Friday.", "AFP"),
+        ("ukraine", "UKRAINE LEFT OFF THE AGENDA IN SHENZHEN",
+         "The war will not be raised in Shenzhen; Kyiv fears a carve-up.", "AP"),
+        ("shenzhen-declaration", "SHENZHEN DECLARATION ADOPTED BY APEC",
+         "Twenty-one economies back digital trade and a community roadmap.", "REUTERS"),
+        ("florida", "FLOODED FLORIDA BRACES FOR MORE RAIN",
+         "Up to 15 inches in Hollywood; schools shut a second day.", "AP"),
+        ("billion-years", "EARTH'S MISSING BILLION YEARS ARE EXPLAINED",
+         "A Nature study blames mantle currents and ancient ice sheets.", "NATURE"),
+        ("melenchon", "M\u00c9LENCHON COULD WIN, SAYS JUSTICE MINISTER",
+         "France's justice minister concedes the hard-left leader could win.", "REUTERS"),
+        ("saudi", "SAUDI ARABIA SAYS DANGER HAS PASSED",
+         "The all-clear in three cities follows a downed Houthi missile.", "AP"),
+        ("libya-cocaine", "COCAINE AND MILLIONS OF PILLS SEIZED IN LIBYA",
+         "One of the country's biggest drug hauls, seized in the east.", "REUTERS"),
     ]
-    grid_y = [304, 436]
-    grid_h, grid_img = 124, 56
+    grid_y = [356, 476]
+    grid_h, grid_img = 112, 52
     grid_w = 195
     grid_x = [8, 211, 414, 617, 820]
     for idx, (name, head, body, src) in enumerate(grid):
@@ -164,7 +218,7 @@ def main():
         pic = cover(raw(name), grid_w - 4, grid_img, cy=0.45)
         img.paste(pic, (x0 + 2, y0 + 2))
         credit(d, x0 + 2, y0 + 2 + grid_img, grid_w - 4, src)
-        ty = y0 + grid_img + 8
+        ty = y0 + grid_img + 6
         hf = font(SANS_B, 12)
         lines = wrap(d, head, hf, grid_w - 16)
         yy = ty
@@ -178,34 +232,36 @@ def main():
             yy += 12
 
     # ---------- Bottom: map + numbered briefs ----------
-    bot_y = 568
+    bot_y = 596
     # --- Map panel ---
     map_x, map_w = 8, 352
     d.text((map_x + 4, bot_y + 2), "WHERE IT HAPPENED", font=font(SANS_B, 15), fill=NAVY)
     d.line([(map_x + 4, bot_y + 24), (map_x + map_w - 4, bot_y + 24)], fill=GOLD, width=2)
     mmap = raw("world-map")
-    map_img = cover(mmap, map_w - 8, 176, cy=0.5)
+    map_img = cover(mmap, map_w - 8, 150, cy=0.5)
     img.paste(map_img, (map_x + 4, bot_y + 30))
     d = ImageDraw.Draw(img)
     # numbered pins: (story, fx, fy, label dx, label dy)
+    # 1 and 8 share Shenzhen; 2 and 9 share Florida; 10 is a global
+    # science story, pinned in the open southern ocean.
     pins = [
         (1, 0.805, 0.375, 0, 0),
-        (2, 0.205, 0.355, 0, 0),
+        (2, 0.205, 0.350, 0, 0),
         (3, 0.155, 0.300, 0, 0),
-        (4, 0.575, 0.325, 0, -20),
-        (5, 0.475, 0.220, 0, 0),
-        (6, 0.235, 0.270, 0, 0),
-        (7, 0.785, 0.475, 0, 0),
-        (8, 0.595, 0.405, 0, 0),
-        (9, 0.588, 0.388, 24, -10),
-        (10, 0.245, 0.470, 0, 0),
-        (11, 0.855, 0.295, 0, 0),
-        (12, 0.815, 0.455, 20, 6),
-        (13, 0.565, 0.355, -24, 12),
+        (4, 0.475, 0.215, 0, 0),
+        (5, 0.570, 0.350, 0, 0),
+        (6, 0.785, 0.475, 0, 0),
+        (7, 0.560, 0.270, 24, -6),
+        (8, 0.805, 0.375, 26, 16),
+        (9, 0.205, 0.350, -4, 22),
+        (10, 0.450, 0.800, 0, 0),
+        (11, 0.462, 0.255, -26, 12),
+        (12, 0.605, 0.420, 18, 10),
+        (13, 0.525, 0.375, -20, 14),
     ]
     mx0, my0 = map_x + 4, bot_y + 30
     for num, fx, fy, ldx, ldy in pins:
-        px, py = mx0 + int(fx * (map_w - 8)), my0 + int(fy * 176)
+        px, py = mx0 + int(fx * (map_w - 8)), my0 + int(fy * 150)
         d.ellipse([px - 3, py - 3, px + 3, py + 3], fill=RED, outline=WHITE, width=1)
         lx, ly = px + ldx, py + ldy
         if ldx or ldy:
@@ -215,31 +271,18 @@ def main():
         tw = d.textlength(str(num), font=nf)
         d.text((lx - tw / 2, ly - 5), str(num), font=nf, fill=WHITE)
     # stat strip
-    sy = bot_y + 214
-    d.rectangle([map_x, sy, map_x + map_w, sy + 34], fill=NAVY)
+    sy = bot_y + 188
+    d.rectangle([map_x, sy, map_x + map_w, sy + 30], fill=NAVY)
     sf = font(SANS_B, 12)
     stat = "43 STORIES \u00b7 13 ILLUSTRATED \u00b7 30 IN BRIEF"
     tw = d.textlength(stat, font=sf)
-    d.text((map_x + (map_w - tw) / 2, sy + 10), stat, font=sf, fill=GOLD)
-    # legend + numbers box
-    ly = sy + 42
+    d.text((map_x + (map_w - tw) / 2, sy + 9), stat, font=sf, fill=GOLD)
+    # legend
+    ly = sy + 38
     d.text((map_x + 4, ly), "Pins mark the 13 illustrated stories, 1-13.",
            font=font(SANS, 11), fill=GREY)
-    ny = ly + 22
-    d.rectangle([map_x, ny, map_x + map_w, ny + 104], outline=BORDER, width=2)
-    d.text((map_x + 12, ny + 8), "THE DAY IN NUMBERS", font=font(SANS_B, 12), fill=RED)
-    nf2 = font(SANS, 11)
-    nums = [
-        "$81.3B \u2014 Anthropic's record IPO",
-        "99/100 \u2014 GTA VI's Metacritic score",
-        "$190.4m \u2014 record Van Gogh sale",
-    ]
-    yy = ny + 30
-    for ln in nums:
-        d.text((map_x + 12, yy), ln, font=nf2, fill=(52, 52, 50))
-        yy += 18
-    d.text((map_x + 12, yy + 4), "2.3m \u2014 Twitch viewers watch GTA VI launch",
-           font=nf2, fill=(52, 52, 50))
+    d.text((map_x + 4, ly + 16), "10 is a global science story, pinned at sea.",
+           font=font(SANS, 11), fill=GREY)
 
     # --- Briefs ---
     br_x, br_w = 368, 648
@@ -247,34 +290,34 @@ def main():
            font=font(SANS_B, 15), fill=NAVY)
     d.line([(br_x, bot_y + 24), (br_x + br_w - 4, bot_y + 24)], fill=GOLD, width=2)
     briefs = [
-        (14, "Hormuz tanker hit; crew safe."),
-        (15, "Coalition warns of missile threat to Riyadh."),
-        (16, "Riyadh: Civil Defence says danger passed."),
-        (17, "U.S. sanctions Hezbollah-linked entities."),
-        (18, "Panama: second arrest in journalist attack."),
-        (19, "Paraguay: Ueno Bank guarantee extended."),
-        (20, "IAEA: North Korea expanding uranium work."),
-        (21, "Bangladesh garment unrest, third week."),
-        (22, "Fed minutes: more hikes; Dow falls 1.3%."),
-        (23, "APEC: Xi pledges $20m for cooperation."),
-        (24, "APEC: Trump hails U.S. economy, hits AI rules."),
-        (25, "APEC: Putin calls Asia-Pacific a growth engine."),
-        (26, "Albanese meets Xi; Darwin port spat flares."),
-        (27, "Albanese snapped with Putin; backs Ukraine."),
-        (28, "Trump praises 'friend' Albanese at Quad."),
-        (29, "Canada, Australia sanction Israeli settlers."),
-        (30, "Four nations: let aid reach flooded Gaza."),
-        (31, "U.S. details $12bn Venezuelan oil revenue."),
-        (32, "Five EU states advance Rwanda return hub."),
-        (33, "Iraq jails six French citizens for life over IS."),
-        (34, "UK 'Scattered Spider' hacker jailed 6 years."),
-        (35, "Indonesia raises key rate as rupiah sinks."),
-        (36, "Seoul backs possible Trump-Kim dialogue."),
-        (37, "Bumrah strikes; NZ 60/4 in Wellington Test."),
-        (38, "Sindhu back in badminton's world top five."),
-        (39, "Delhi schools resume as smog curbs lifted."),
-        (40, "Dutch far right used 'remigration' 96 times."),
-        (41, "Data breach hits 40 Irish credit unions."),
+        (14, "Crimea Bridge hit again; traffic shut."),
+        (15, "Van Gogh sells for a record $190.4m."),
+        (16, "Israeli tanks cross Gaza ceasefire line."),
+        (17, "Eisenkot tapped to form Israel's government."),
+        (18, "U.S. and Venezuela restore military ties."),
+        (19, "India, Japan hold 2+2 defence talks in Tokyo."),
+        (20, "U.S. pursues $2B-plus loan package for Manila."),
+        (21, "Hormuz tanker hit; crew safe."),
+        (22, "Coalition warns of missile threat to Riyadh."),
+        (23, "U.S. sanctions Hezbollah-linked entities."),
+        (24, "Panama: second arrest in journalist attack."),
+        (25, "IAEA: North Korea expanding uranium work."),
+        (26, "Bangladesh garment unrest, third week."),
+        (27, "Fed minutes: more hikes; Dow falls 1.3%."),
+        (28, "APEC: Trump hails U.S. economy, hits AI rules."),
+        (29, "APEC: Putin calls Asia-Pacific a growth engine."),
+        (30, "Albanese meets Xi; Darwin port spat flares."),
+        (31, "Albanese snapped with Putin; backs Ukraine."),
+        (32, "Canada, Australia sanction Israeli settlers."),
+        (33, "U.S. details $12bn Venezuelan oil revenue."),
+        (34, "Five EU states advance Rwanda return hub."),
+        (35, "Iraq jails six French citizens for life over IS."),
+        (36, "UK 'Scattered Spider' hacker jailed 6 years."),
+        (37, "Indonesia raises key rate as rupiah sinks."),
+        (38, "Seoul backs possible Trump-Kim dialogue."),
+        (39, "Bumrah strikes; NZ 60/4 in Wellington Test."),
+        (40, "Delhi schools resume as smog curbs lifted."),
+        (41, "Dutch far right used 'remigration' 96 times."),
         (42, "France braces for fourth protest weekend."),
         (43, "Jessica L. Nelson wins Prix Interallie."),
     ]
@@ -286,7 +329,7 @@ def main():
         col, row = (0, i) if i < 15 else (1, i - 15)
         x0 = col_x[col]
         # y position: stack by measured lines of previous briefs in this column
-        yy = bot_y + 34
+        yy = bot_y + 30
         for j in range(row):
             pnum, ptext = briefs[j + (0 if col == 0 else 15)]
             plines = wrap(d, ptext, bf, col_w - 26)
@@ -298,15 +341,34 @@ def main():
             d.text((x0 + 26, ly2), ln, font=bf, fill=INK)
             ly2 += 14
 
+    # ---------- DATE CHECK box ----------
+    dc_y, dc_h = 928, 44
+    d.rectangle([8, dc_y, W - 8, dc_y + dc_h], outline=RED, width=2)
+    d.text((16, dc_y + 5),
+           "DATE CHECK \u2014 FIRST REPORTED WEDNESDAY 18 NOV, SO NOT ON THIS PAGE AS NEWS:",
+           font=font(SANS_B, 11), fill=RED)
+    dc_items = ("the Iranian drone interceptions \u00b7 the EU's proposed \u20ac45bn loan "
+                "for Ukraine \u00b7 the House Democrats' 251-11 vote nominating Hakeem "
+                "Jeffries \u00b7 Voyager 1 crossing one light-day \u00b7 Peltola's Alaska "
+                "win \u00b7 Pew's projection that Islam becomes the largest religion by "
+                "2035 \u00b7 the first COP31 draft (Monday) \u00b7 the NSA network outage "
+                "(Tuesday)")
+    df = font(SANS, 10)
+    lines = wrap(d, dc_items, df, W - 32)
+    yy = dc_y + 20
+    for ln in lines[:2]:
+        d.text((16, yy), ln, font=df, fill=INK)
+        yy += 12
+
     # ---------- Footer ----------
-    fy = 980
-    d.rectangle([0, fy - 6, W, fy - 2], fill=GOLD)
-    d.rectangle([0, fy - 2, W, H], fill=NAVY)
+    fy = 978
+    d.rectangle([0, fy, W, fy + 2], fill=GOLD)
+    d.rectangle([0, fy + 2, W, H], fill=NAVY)
     ff = font(SANS, 11)
-    d.text((16, fy + 8),
+    d.text((16, fy + 10),
            "Every story was reported on Thursday 19 November 2026; disputed claims are attributed.",
            font=ff, fill=LIGHT)
-    d.text((16, fy + 24),
+    d.text((16, fy + 26),
            "Sources: Reuters, AP, AFP, BBC, Al Jazeera and others. Original drawings.",
            font=ff, fill=GOLD)
 
